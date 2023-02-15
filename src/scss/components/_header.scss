@@ -1,0 +1,11 @@
+.table__header.table-header {
+  display: flex;
+  border-bottom: 1px solid #979797;
+
+  .table-header__name,
+  .table-header__value {
+    width: 160px;
+    padding: 10px;
+    font-weight: 600;
+  }
+}

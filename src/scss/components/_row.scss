@@ -1,0 +1,17 @@
+.table-body__row.table-row {
+  display: flex;
+  border-bottom: 1px solid #979797;
+
+  .table-row__name,
+  .table-row__value {
+    width: 160px;
+    padding: 10px;
+  }
+
+  .table-row__deleteIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+}
