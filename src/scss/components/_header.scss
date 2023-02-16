@@ -1,6 +1,8 @@
 .table__header.table-header {
   display: flex;
   border-bottom: 1px solid #979797;
+  padding-left: 10px;
+  padding-right: 10px;
 
   .table-header__name,
   .table-header__value {

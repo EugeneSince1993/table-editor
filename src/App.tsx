@@ -1,35 +1,13 @@
-import './scss/app.scss';
 import { Table } from './components/Table';
-import { IDevice, IDevices, Items } from './types';
-import { useEffect, useState } from 'react';
+import { IDevice, Items } from './types';
+import { ChangeEvent, useEffect, useState } from 'react';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowDownShortWide } from '@fortawesome/free-solid-svg-icons';
 import { Sort } from './components/Sort';
+import data from './data.json';
 
 function App() {
-  const [items, setItems] = useState<Items>({
-    devices: [
-      {
-        name: "Apple", 
-        value: "iPhone 14"
-      },
-      {
-        name: "Redmi", 
-        value: "Note 11"
-      },
-      {
-        name: "Samsung", 
-        value: "Galaxy A52"
-      },
-      {
-        name: "Google", 
-        value: "Pixel 7 Pro"
-      }
-    ]
-  });
-
-  // <FontAwesomeIcon icon={faArrowDownShortWide} />
+  const [items, setItems] = useState<Items>(data);
+  const [textValue, setTextValue] = useState<string>(JSON.stringify(data));
 
   const sortItems = (prop: string, order: string) => {
     const sortedItems = items.devices
@@ -81,11 +59,40 @@ function App() {
     console.log(items);
   }, [items]);
 
+  const handleTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setTextValue(e.target.value);
+  };
+
+  const handleClickLoad = () => {
+    setItems(JSON.parse(textValue));
+  };
+
+  const handleClickSave = () => {
+    setTextValue(JSON.stringify(items));
+  };
+
   return (
     <div className="app">
       <h3>Табличный редактор</h3>
       <Sort sortItems={sortItems} />
-      <Table items={items} deleteItem={deleteItem} />
+      <Table items={items} setItems={setItems} deleteItem={deleteItem} />
+      <div>
+        <button onClick={handleClickSave}>Сохранить</button>
+      </div>
+      <div>
+        <h4>Загрузка данных</h4>
+        <div>
+          <textarea 
+            id="text"
+            name="text"
+            value={textValue}
+            onChange={handleTextChange} 
+          />
+          <div>
+            <button onClick={handleClickLoad}>Загрузить</button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

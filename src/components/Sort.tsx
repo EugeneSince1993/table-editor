@@ -1,4 +1,4 @@
-import { FC, MouseEvent, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 
 interface ISortProps {
   sortItems: (prop: string, order: string) => void;
@@ -10,7 +10,7 @@ export const Sort: FC<ISortProps> = ({
   const [column, setColumn] = useState<string>("name");
   const [orderBy, setOrderBy] = useState<string>("asc");
 
-  const handleSort = (event: MouseEvent<HTMLButtonElement>) => {
+  const handleSort = () => {
     sortItems(column, orderBy);
   };
 

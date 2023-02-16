@@ -5,15 +5,26 @@ import { Row } from "./Row";
 
 interface ITableProps {
   items: Items;
+  setItems: (items: Items) => void;
   deleteItem: (index: number) => void;
 }
 
 export const Table: FC<ITableProps> = ({
   items,
+  setItems,
   deleteItem
 }) => {
   const rows = items.devices.map((item: IDevice, index: number) => {
-    return <Row item={item} key={index} deleteItem={deleteItem} index={index} />;
+    return (
+      <Row 
+        item={item} 
+        items={items}
+        setItems={setItems}
+        deleteItem={deleteItem} 
+        index={index} 
+        key={index} 
+      />
+    );
   });
 
   return (
